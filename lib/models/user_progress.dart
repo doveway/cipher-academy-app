@@ -38,8 +38,17 @@ class UserProgress extends Equatable {
       ];
 
   bool canUseHint() {
-    if (isPremium) return true;
-    return hintsUsedToday < 1;
+    if (isPremium) {
+      return hintsUsedToday < 50; // Premium: 50 hints per day
+    }
+    return hintsUsedToday < 3; // Free: 3 hints per day
+  }
+
+  int get remainingHints {
+    if (isPremium) {
+      return (50 - hintsUsedToday).clamp(0, 50);
+    }
+    return (3 - hintsUsedToday).clamp(0, 3);
   }
 
   UserProgress copyWith({

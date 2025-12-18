@@ -37,6 +37,41 @@ enum Difficulty {
   master,
 }
 
+class PuzzleVariant extends Equatable {
+  final String question;
+  final String solution;
+  final List<String> options;
+  final Map<String, dynamic>? variantData;
+
+  const PuzzleVariant({
+    required this.question,
+    required this.solution,
+    required this.options,
+    this.variantData,
+  });
+
+  @override
+  List<Object?> get props => [question, solution, options];
+
+  factory PuzzleVariant.fromJson(Map<String, dynamic> json) {
+    return PuzzleVariant(
+      question: json['question'] as String,
+      solution: json['solution'] as String,
+      options: (json['options'] as List<dynamic>).cast<String>(),
+      variantData: json['variantData'] as Map<String, dynamic>?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'question': question,
+      'solution': solution,
+      'options': options,
+      'variantData': variantData,
+    };
+  }
+}
+
 class Puzzle extends Equatable {
   final String id;
   final String title;
@@ -54,6 +89,8 @@ class Puzzle extends Equatable {
   final int hintCost;
   final String? storyContext;
   final List<String>? prerequisitePuzzleIds;
+  final List<String>? multipleChoiceOptions; // For multiple choice answers
+  final List<PuzzleVariant>? questionPool; // Pool of question variants
 
   const Puzzle({
     required this.id,
@@ -72,6 +109,8 @@ class Puzzle extends Equatable {
     this.hintCost = 10,
     this.storyContext,
     this.prerequisitePuzzleIds,
+    this.multipleChoiceOptions,
+    this.questionPool,
   });
 
   @override
@@ -101,6 +140,10 @@ class Puzzle extends Equatable {
       hintCost: json['hintCost'] as int? ?? 10,
       storyContext: json['storyContext'] as String?,
       prerequisitePuzzleIds: (json['prerequisitePuzzleIds'] as List<dynamic>?)?.cast<String>(),
+      multipleChoiceOptions: (json['multipleChoiceOptions'] as List<dynamic>?)?.cast<String>(),
+      questionPool: (json['questionPool'] as List<dynamic>?)
+          ?.map((e) => PuzzleVariant.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
   }
 
@@ -122,6 +165,8 @@ class Puzzle extends Equatable {
       'hintCost': hintCost,
       'storyContext': storyContext,
       'prerequisitePuzzleIds': prerequisitePuzzleIds,
+      'multipleChoiceOptions': multipleChoiceOptions,
+      'questionPool': questionPool?.map((v) => v.toJson()).toList(),
     };
   }
 }

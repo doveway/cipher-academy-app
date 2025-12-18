@@ -67,4 +67,13 @@ class StorageService {
       await saveUserProgress(updatedProgress);
     }
   }
+
+  // Generic string storage for user profiles
+  Future<void> saveString(String key, String value) async {
+    await _prefs.setString(key, value);
+  }
+
+  Future<String?> getString(String key) async {
+    return _prefs.getString(key);
+  }
 }

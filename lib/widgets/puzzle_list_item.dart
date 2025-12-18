@@ -119,8 +119,11 @@ class PuzzleListItem extends StatelessWidget {
                                       ? AppTheme.parchment
                                       : AppTheme.darkParchment,
                                 ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
+                        const SizedBox(width: 8),
                         Container(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 8,

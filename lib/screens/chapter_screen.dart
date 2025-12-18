@@ -42,17 +42,16 @@ class ChapterScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 60),
+                      const SizedBox(height: 40),
                       Text(
                         chapter.subtitle,
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
                               color: AppTheme.brass,
                             ),
                       ),
-                      const SizedBox(height: 16),
                     ],
                   ),
                 ),

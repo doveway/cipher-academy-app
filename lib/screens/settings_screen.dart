@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../services/game_state_provider.dart';
 import '../services/storage_service.dart';
 import '../theme/app_theme.dart';
+import 'engagement_demo_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -216,6 +217,34 @@ class SettingsScreen extends StatelessWidget {
             },
             activeColor: AppTheme.brass,
           ),
+        ),
+        ListTile(
+          leading: const Icon(Icons.emoji_events, color: Colors.amber),
+          title: const Text('🎮 New Features Demo'),
+          subtitle: const Text('Preview multiplayer & engagement features'),
+          trailing: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            decoration: BoxDecoration(
+              color: Colors.amber,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: const Text(
+              'NEW',
+              style: TextStyle(
+                color: AppTheme.darkNavy,
+                fontSize: 10,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const EngagementDemoScreen(),
+              ),
+            );
+          },
         ),
         ListTile(
           leading: const Icon(Icons.restore, color: AppTheme.brass),
